@@ -13,7 +13,7 @@ jobs:
     - run: pdflatex test.tex
 
   testcache:
-    needs: text
+    needs: test
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

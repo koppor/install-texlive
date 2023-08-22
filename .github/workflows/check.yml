@@ -7,7 +7,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  first-run:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -18,14 +18,12 @@ jobs:
         packages: latex-bin
     - run: pdflatex test.tex
 
-  testcache:
-    needs: test
+  run-with-cache:
+    needs: first-run
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Run the action
       uses: ./
-    - run: echo $PATH
-    - run: ls -la $HOME/texlive/bin/x86_64-linux/pdflatex
     - run: pdflatex test.tex

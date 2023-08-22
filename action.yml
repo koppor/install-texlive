@@ -57,4 +57,5 @@ runs:
         if ${{ steps.install.outcome == 'success' }} ; then echo "key=${{ steps.load-cache.outputs.cache-primary-key }}" ; else echo "key=${{ steps.load-cache.outputs.cache-matched-key }}" ; fi >> $GITHUB_OUTPUT
       id: key
     - name: Set path
+      shell: sh
       run: echo "$HOME/texlive/bin/x86_64-linux" >> $GITHUB_PATH

@@ -24,4 +24,6 @@ jobs:
       uses: actions/checkout@v2
     - name: Run the action
       uses: ./
+    - run: echo $PATH
+    - run: ls -la $HOME/texlive/bin/x86_64-linux/pdflatex
     - run: pdflatex test.tex

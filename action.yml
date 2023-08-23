@@ -29,7 +29,7 @@ runs:
       shell: sh
       run: |
         echo "date=$(date -I)" >> $GITHUB_OUTPUT
-        HASH=$(echo "$TEXLIVE_PACKAGE_LIST" | md5sum | cut -d ' ' -f 1)
+        HASH=$(jq -r '.inputs.packages' $GITHUB_EVENT_PATH | md5sum | cut -d ' ' -f 1)
         echo "packages-hash=$HASH" >> $GITHUB_OUTPUT
       env:
         TEXLIVE_PACKAGE_LIST: ${{ inputs.packages }}

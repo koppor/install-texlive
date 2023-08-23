@@ -30,13 +30,12 @@ runs:
       run: |
         echo "date=$(date -I)" >> $GITHUB_OUTPUT
         echo "${{ inputs.packages }}" > /tmp/texlive-packages.txt
-        echo "hash=${{ hashFiles('/tmp/texlive-packages.txt') }}" >> $GITHUB_OUTPUT
     - name: Load cache
       id: load-cache
       uses: actions/cache/restore@v3
       with:
         path: ~/texlive
-        key: texlive-${{ inputs.cache_version }}-${{ hashFiles(inputs.package_file) }}-${{ steps.get-date.outputs.hash }}-${{ steps.get-date.outputs.date }}
+        key: texlive-${{ inputs.cache_version }}-${{ hashFiles(inputs.package_file) }}-${{ hashFiles('/tmp/texlive-packages.txt') }}-${{ steps.get-date.outputs.date }}
     - run: ${{ github.action_path }}/texlive.sh
       if: steps.load-cache.outputs.cache-hit != 'true'
       id: install

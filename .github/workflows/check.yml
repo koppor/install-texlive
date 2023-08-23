@@ -32,6 +32,13 @@ jobs:
         cache_version: ${{ github.run_id }}_${{ github.run_attempt }}
         repository: https://127.0.0.42/not-a-texlive-mirror/
     - run: pdflatex test.tex
+    - name: '"pdflatex test-enumitem.tex" should fail'
+      run: |
+        pdflatex test-enumitem.tex
+        if [ $? -eq 0 ]; then
+          exit 1
+        fi
+        exit 0
 
   run-without-cache:
     needs: first-run
@@ -42,6 +49,6 @@ jobs:
     - name: Run the action
       uses: ./
       with:
-        packages: latex-bin blindtext
+        packages: latex-bin enumitem
         cache_version: ${{ github.run_id }}_${{ github.run_attempt }}
-    - run: pdflatex test-blindtext.tex
+    - run: pdflatex test-enumitem.tex

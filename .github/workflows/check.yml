@@ -34,7 +34,7 @@ jobs:
     - run: pdflatex test.tex
     - name: '"pdflatex test-enumitem.tex" should fail'
       run: |
-        pdflatex test-enumitem.tex
+        pdflatex -interaction=nonstopmode test-enumitem.tex
         if [ $? -eq 0 ]; then
           exit 1
         fi

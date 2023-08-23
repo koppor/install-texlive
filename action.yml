@@ -31,8 +31,6 @@ runs:
         echo "date=$(date -I)" >> $GITHUB_OUTPUT
         HASH=$(jq -r '.inputs.packages' $GITHUB_EVENT_PATH | md5sum | cut -d ' ' -f 1)
         echo "packages-hash=$HASH" >> $GITHUB_OUTPUT
-      env:
-        TEXLIVE_PACKAGE_LIST: ${{ inputs.packages }}
     - name: Load cache
       id: load-cache
       uses: actions/cache/restore@v3

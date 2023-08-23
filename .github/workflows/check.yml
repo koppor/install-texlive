@@ -34,14 +34,9 @@ jobs:
     - run: pdflatex test.tex
     - name: '"pdflatex test-enumitem.tex" should fail'
       run: |
-        pdflatex -interaction=nonstopmode test-enumitem.tex
-        echo "afterwards"
-        if [ $? -eq 0 ]; then
-          echo "exit 1"
-          exit 1
-        fi
-        echo "exit 0"
-        exit 0
+        CODE=1
+        pdflatex -interaction=nonstopmode test-enumitem.tex || CODE=0
+        exit $CODE
 
   run-without-cache:
     needs: first-run
